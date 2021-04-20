@@ -26,29 +26,36 @@ CREATE DATABASE employeeTrackerDB;
 USE employeeTrackerDB;
 
 CREATE TABLE departments(
-    id INTEGER NOT NULL AUTO_INCREMENT,
-    name VARCHAR(30),
-    PRIMARY KEY (id)
+    id INTEGER  AUTO_INCREMENT PRIMARY KEY, 
+    name VARCHAR(30)
 
 );
 
 
 CREATE TABLE roles(
-    id INTEGER NOT NULL AUTO_INCREMENT,
+    id INTEGER  AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(30),
     salary DECIMAL,
     department_id INTEGER NULL,
-    PRIMARY KEY (id)
+-- rule only for departments then we create the foreign then we refrence the foreign created
+    CONSTRAINT FK_departments FOREIGN KEY(department_id) REFERENCES departments(id)
+    -- when we delete it must follow the same rules as the table so it can be deleted as well 
+    ON DELETE CASCADE
 );
 
 
 
 CREATE TABLE employees(
-    id INTEGER NOT NULL AUTO_INCREMENT,
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     role_id INTEGER  NULL,
     manager_id INTEGER  NULL,
-    PRIMARY KEY(id)
+    
+    CONSTRAINT FK_roles FOREIGN KEY(role_id) REFERENCES roles(id)
+    ON DELETE CASCADE,
+
+    CONSTRAINT FK_manager FOREIGN KEY (manager_id) REFERENCES employees(id)
+    ON DELETE SET NULL
 
 );
