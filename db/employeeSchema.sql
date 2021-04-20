@@ -47,8 +47,8 @@ CREATE TABLE employees(
     id INTEGER NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(30),
     last_name VARCHAR(30),
-    role_id INTEGER NOT NULL,
-    manager_id INTEGER NOT NULL,
+    role_id INTEGER  NULL,
+    manager_id INTEGER  NULL,
     PRIMARY KEY(id)
 
 );
