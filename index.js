@@ -36,15 +36,19 @@ switch(response.choices){
         break;
     case "Add employee": 
         addEmployeePrompts();
+
         break;
     case "Add roles": 
         addRolePrompts();
+        
         break;
     case "Add departments": 
         addDepartmentsPrompts();
+       
         break;
     case "Update role": 
         updateEmployeeRolePrompts();
+       
         break;
     case "Exit":
        
@@ -75,16 +79,20 @@ async function addEmployeePrompts(){
             message: "Please choose a employee role. ",
             choices: roles.map(role => ({value: role.id, name: role.title}))
         }
-    ])
+    ]);
+    db.addEmployee(newEmployee);
+    console.log("The employee has been added!")
+    start();
+    
 }
 async function addRolePrompts(){
     // user to select a new role to add
     const roles = await db.findAllRoles();
     const newRole = await inquirer.prompt([
         {
-            type: "input",
+            type: "list",
             name: "department",
-            message: "What is the employee's role?"
+            message: "What is the employee's role?",
         },
         {}
 
