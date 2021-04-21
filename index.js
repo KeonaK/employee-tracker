@@ -38,16 +38,16 @@ switch(response.choices){
         addEmployeePrompts();
         break;
     case "Add roles": 
-        addRoles();
+        addRolePrompts();
         break;
     case "Add departments": 
-        addDepartments();
+        addDepartmentsPrompts();
         break;
     case "Update role": 
-        updateEmployeeRole();
+        updateEmployeeRolePrompts();
         break;
     case "Exit":
-        connection.end();
+       
         process.exit();
     default: 
         break;
@@ -56,7 +56,6 @@ switch(response.choices){
 }
 
 async function addEmployeePrompts(){
-    // have the user select from roles 
 
     const roles = await db.findAllRoles();
     const newEmployee = await inquirer.prompt([
@@ -78,7 +77,7 @@ async function addEmployeePrompts(){
         }
     ])
 }
-async function addRole(){
+async function addRolePrompts(){
     // user to select a new role to add
     const roles = await db.findAllRoles();
     const newRole = await inquirer.prompt([
@@ -91,3 +90,6 @@ async function addRole(){
 
     ])
 }
+
+// addDepartmentsPrompts()
+// updateEmployeeRolePrompts()
