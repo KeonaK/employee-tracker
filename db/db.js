@@ -18,39 +18,35 @@ return this.connection.query("SELECT employees.id, employees.first_name, employe
 
 //find departments 
 findAllDepartments(){
-    return this.connection.query("SELECT * FROM departments", (err, res) => {
-        if (err) throw err;
-        console.table(res);
-     
-      })
+    return this.connection.query("SELECT * FROM departments");
 }
 
 //find roles 
 findAllRoles(){
-    return this.connection.query("SELECT roles.title FROM roles", (err, res) => {
-        if (err) throw err;
-        console.table(res);
-     
-      })
+    return this.connection.query("SELECT roles.title FROM roles");
 }
 
 // * Add departments, roles, employees
 addDepartments(departments){
-    return this.connection.query("INSERT INTO departments SET ?", departments)
+    return this.connection.query("INSERT INTO departments SET ?", departments);
 }
 
 addRoles(roles){
-    return this.connection.query("INSERT INTO roles SET ?", roles)
+    return this.connection.query("INSERT INTO roles SET ?", roles);
 }
 
 addEmployee(employees){
-return this.connection.query("INSERT INTO employees SET ?",employees)
+return this.connection.query("INSERT INTO employees SET ?",employees);
 }
 
 
 // * Update employee roles
 updateEmployeeRole(roleId, employeeId){
-    return this.connection.query("UPDATE employees SET role_id ? WHERE id = ?")
+    return this.connection.query("UPDATE employees SET role_id ? WHERE id = ?", (err, res) => {
+        if (err) throw err;
+        console.table(res);
+     
+      })
 }
 
 }

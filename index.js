@@ -1,7 +1,6 @@
 const mysql = require("mysql");
-const inquirer = ("inquirer");
+const inquirer = require("inquirer");
 const db = require("./db/db");
-const { findAllEmployees, findAllDepartments, findAllRoles, addEmployee, addRoles, addDepartments, updateEmployeeRole } = require("./db/db");
 
 
 
@@ -9,9 +8,8 @@ const { findAllEmployees, findAllDepartments, findAllRoles, addEmployee, addRole
 
 start();
  
-async function start(){
-    
-const getChoices = await inquirer.prompt([
+ async function start(){
+ const response = await  inquirer.prompt([
 {
     type: "list",
     name: "choices",
@@ -20,18 +18,24 @@ const getChoices = await inquirer.prompt([
 }
 ])
 
-switch(getChoices){
+switch(response.choices){
     case "View all employees": 
-        findAllEmployees();
+        const employeeData = await db.findAllEmployees();
+        console.table(employeeData);
+        start();
         break;
     case "View all departments":
-        findAllDepartments();
+        const departmentData = await db.findAllDepartments();
+        console.table(departmentData);
+        start();
         break;
     case "View all roles": 
-        findAllRoles();
+        const roleData = await db.findAllRoles();
+        console.table(roleData);
+        start();
         break;
     case "Add employee": 
-        addEmployee();
+        addEmployeePrompts();
         break;
     case "Add roles": 
         addRoles();
@@ -43,9 +47,47 @@ switch(getChoices){
         updateEmployeeRole();
         break;
     case "Exit":
+        connection.end();
         process.exit();
     default: 
         break;
 
 }
+}
+
+async function addEmployeePrompts(){
+    // have the user select from roles 
+
+    const roles = await db.findAllRoles();
+    const newEmployee = await inquirer.prompt([
+        {
+            type: "input",
+            name: "first_name",
+            message: "What is the employee's first name? "
+        },
+        {
+            type: "input",
+            name: "last_name",
+            message: "What is the employee's last name?"
+        },
+        {
+            type: "list",
+            name: "role_id",
+            message: "Please choose a employee role. ",
+            choices: roles.map(role => ({value: employees.id, name: role.title}))
+        }
+    ])
+}
+async function addRole(){
+    // user to select a new role to add
+    const roles = await db.findAllRoles();
+    const newRole = await inquirer.prompt([
+        {
+            type: "input",
+            name: "department",
+            message: "What is the employee's role?"
+        },
+        {}
+
+    ])
 }
