@@ -73,7 +73,7 @@ async function addEmployeePrompts(){
             type: "list",
             name: "role_id",
             message: "Please choose a employee role. ",
-            choices: roles.map(role => ({value: employees.id, name: role.title}))
+            choices: roles.map(role => ({value: role.id, name: role.title}))
         }
     ])
 }
