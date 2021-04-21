@@ -37,7 +37,7 @@ CREATE TABLE roles(
     title VARCHAR(30),
     salary DECIMAL,
     department_id INTEGER NULL,
--- rule only for departments then we create the foreign then we refrence the foreign created
+-- rule only for departments then we create the foreign then we refrence the foreign key created
     CONSTRAINT FK_departments FOREIGN KEY(department_id) REFERENCES departments(id)
     -- when we delete it must follow the same rules as the table so it can be deleted as well 
     ON DELETE CASCADE
