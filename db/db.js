@@ -24,6 +24,7 @@ findAllDepartments(){
 //find roles 
 findAllRoles(){
     return this.connection.query("SELECT roles.title FROM roles");
+    roles.map
 }
 
 // * Add departments, roles, employees
@@ -42,14 +43,12 @@ return this.connection.query("INSERT INTO employees SET ?",employees);
 
 // * Update employee roles
 updateEmployeeRole(roleId, employeeId){
-    return this.connection.query("UPDATE employees SET role_id ? WHERE id = ?", (err, res) => {
-        if (err) throw err;
-        console.table(res);
+    return this.connection.query("UPDATE employees SET role_id ? WHERE id = ?", roleId,employeeId)
      
-      })
+      }
 }
 
-}
+
 
 //we are always passing in connection
 module.exports = new DB(connection)
