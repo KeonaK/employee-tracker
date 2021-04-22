@@ -117,4 +117,25 @@ async function addDepartmentsPrompts(){
     console.log("The department has now been added!");
     start();
 }
-// updateEmployeeRolePrompts()
+async function updateEmployeeRolePrompts(){
+    const roles = await db.findAllRoles();
+    const employees = await db.findAllEmployees();
+    const updatedEmployee = await inquirer.prompt([
+        {
+            type: "list",
+            name: "employees",
+            message: "Which employee would you like to update? ",
+            choices: employees.map(employee => ({name: employee.first_name, value: employee.id})),
+        },
+        {
+            type: "list",
+            name: "role_id",
+            message: "Enter the new role.",
+            choices: roles.map(role => ({name: role.title, value: role.id})),
+        }
+
+    ])
+    db.updateEmployeeRole(updatedEmployee);
+    console.log("The role has now been updated!");
+    start();
+}
