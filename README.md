@@ -18,7 +18,11 @@ This project allows the user to view their employees, departments and employees 
 
 ## ScreenShot
 
+![screen shot](images/terminalimage.png)
+
 ## ScreenCast
+
+https://drive.google.com/file/d/1ESNSP8O4QYlMeZawR1as01XKdOKxcdPb/view
 
 ## Installation
 
